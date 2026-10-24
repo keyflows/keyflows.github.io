@@ -4,6 +4,53 @@
   outline-offset: 3px;
 }
 
+.typing-card {
+  --typing-progress: 0%;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.typing-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: var(--typing-progress);
+  height: 2px;
+  border-radius: 0 2px 0 0;
+  background: var(--accent);
+  transition: width 120ms linear;
+  pointer-events: none;
+}
+
+.typing-card:hover,
+.typing-card.is-running {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
+}
+
+.typing-card.is-running {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+/* Keep the upcoming glyph visually neutral; show only the cursor after typing begins. */
+.typing-text .char.current {
+  color: inherit;
+}
+
+.typing-text:not(.is-started) .char.current::before {
+  opacity: 0;
+}
+
+/* Keep per-character feedback calm: typed letters use contrast alone, and an
+   error uses color plus a light surface tint without decorative underlines. */
+.typing-text .char.correct,
+.typing-text .char.incorrect {
+  text-decoration: none;
+}
+
+.typing-text .char.incorrect {
+  background: color-mix(in srgb, var(--bad) 12%, transparent);
+}
+
 .mode-toolbar {
   border: 0;
   border-bottom: 1px solid var(--line);
@@ -23,6 +70,159 @@
 .dialog a {
   color: var(--accent);
   text-underline-offset: 3px;
+}
+
+/* Give the actual practice passage room to breathe. The passage stays the
+   visual anchor while the controls remain compact and easy to scan. */
+.practice-shell {
+  padding: 22px 26px 17px;
+  border-radius: 20px;
+  box-shadow: 0 18px 54px #00000016;
+}
+
+.live-stats {
+  gap: clamp(24px, 4vw, 48px);
+  padding-top: 23px;
+  padding-bottom: 20px;
+}
+
+.typing-card {
+  min-height: 294px;
+  padding: 19px 23px 14px;
+  border-radius: 15px;
+}
+
+.typing-text {
+  height: 206px;
+  padding-top: 23px;
+  font-size: 24px;
+  line-height: 1.72;
+  letter-spacing: .01em;
+}
+
+.start-overlay {
+  inset-block: 42px 43px;
+  font-size: 14px;
+}
+
+@media (max-width: 650px) {
+  main {
+    padding-top: 24px;
+  }
+
+  .hero-line {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .hero-line > div:first-child {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .hero-line h1 {
+    margin: 5px 0 5px;
+    font-size: clamp(29px, 8vw, 34px);
+  }
+
+  .hero-line .eyebrow {
+    font-size: 8px;
+    letter-spacing: .1em;
+  }
+
+  .hero-line .subhead {
+    max-width: 30ch;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .streak-mini {
+    flex: none;
+    width: auto;
+    gap: 7px;
+    margin-top: 20px;
+    padding: 8px 9px;
+  }
+
+  .streak-mini small {
+    display: none;
+  }
+
+  .streak-icon {
+    font-size: 16px;
+  }
+
+  .streak-mini b {
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .practice-shell {
+    padding: 14px 13px 11px;
+    border-radius: 16px;
+  }
+
+  .live-stats {
+    gap: 9px;
+    padding: 16px 3px 14px;
+  }
+
+  .typing-card {
+    min-height: 260px;
+    padding: 14px 15px 12px;
+  }
+
+  .typing-text {
+    height: 176px;
+    padding-top: 18px;
+    font-size: 20px;
+    line-height: 1.68;
+  }
+
+  .start-overlay {
+    inset-block: 39px 42px;
+  }
+}
+
+@media (max-width: 390px) {
+  .mode-toolbar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 7px;
+  }
+
+  .mode-toolbar .segmented,
+  .mode-toolbar .option-group,
+  .mode-toolbar .select-wrap {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .mode-toolbar .option-group {
+    justify-content: space-between;
+  }
+
+  .mode-toolbar .select-wrap {
+    margin: 0;
+  }
+
+  .typing-card {
+    min-height: 245px;
+  }
+
+  .typing-text {
+    height: 160px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 350px) {
+  .typing-text {
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 390px) {

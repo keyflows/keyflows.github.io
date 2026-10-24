@@ -1,17 +1,17 @@
 const easyWords = 'the a and to in is it you of that we can my are on for with this make find your time good calm soft warm little open steady gentle focus flow light kind breathe begin next'.split(' ');
 const standardWords = 'quiet morning brings a fresh start as light moves slowly across the room take a breath and let your hands settle into a comfortable rhythm small steps can carry us farther than we expect'.split(' ');
 const hardWords = 'curiosity transforms ordinary moments into meaningful discoveries; deliberate practice builds confidence through patient repetition. thoughtful attention reveals patterns, precision, and possibility.'.split(' ');
-const punctuationWords = ['“steady progress,” she said, “begins with one careful step.”','It’s a quiet day: breathe, focus, and keep moving.','A good rhythm isn’t rushed; it’s chosen.','Practice—patiently, kindly—and let your confidence grow.'];
+const punctuationMarks=['.',',',';','?', '!','—'];
 const numberWords = ['There are 7 quiet minutes in this warm-up.','A small 12% gain can feel meaningful over time.','Try 3 gentle rounds of 20 words each.','The 2026 practice log records your pace locally.'];
 const allWords = 'after again almost always another around because before begin between build change choice clear come could create day different early every example feel few first follow from friend give grow hand have help here however just keep know learn leave life like listen live look many maybe more most move much must never new night often once only other our over people place point practice read real right same say see seem share should simple since slow some start still story strong such take tell than then there these thing think through together try turn under until use usually very voice walk want way week well when where while who why will word work world write year yet'.split(' ');
-const seededPick = (arr, seed, i) => arr[((seed * 9301 + i * 49297 + 233) >>> 0) % arr.length];
+function seededRandom(seed){let state=Number(seed)>>>0;return ()=>{state=(state+0x6D2B79F5)>>>0;let t=state;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;};}
+function shuffledCycle(source,random){const words=[...source];for(let i=words.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[words[i],words[j]]=[words[j],words[i]];}return words;}
 export function generateWords(count=50,{difficulty='standard',punctuation=false,numbers=false,seed=Date.now()}={}){
   const source=difficulty==='easy'?easyWords:difficulty==='hard'?allWords:standardWords;
-  const out=[];
+  const random=seededRandom(seed),out=[];let cycle=[],cycleIndex=0;
   for(let i=0;i<count;i++){
-    if(punctuation&&i%7===6) out.push(seededPick(punctuationWords,seed,i).split(' ')[i%3]||seededPick(punctuationWords,seed,i).replace(/[“”]/g,''));
-    else if(numbers&&i%8===7) out.push(String((seed+i*37)%997));
-    else {let word=seededPick(source,seed,i); if(difficulty==='hard'&&i%13===12)word+=','; out.push(word);}
+    if(numbers&&i%8===7) out.push(String(Math.floor(random()*997)+1));
+    else {if(cycleIndex>=cycle.length){cycle=shuffledCycle(source,random);cycleIndex=0;}let word=cycle[cycleIndex++];if(punctuation&&i%7===6)word+=punctuationMarks[Math.floor(random()*punctuationMarks.length)];else if(difficulty==='hard'&&i%13===12)word+=',';out.push(word);}
   }
   return out.join(' ');
 }

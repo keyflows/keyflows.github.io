@@ -27,8 +27,8 @@ Then open <http://localhost:8000/>. To run the browser tests, open <http://local
 
 1. Push this repository to GitHub.
 2. In **Settings → Pages**, choose **Deploy from a branch**, select `main` (or your publishing branch) and `/ (root)`, then save. GitHub Pages also supports the GitHub Actions static HTML deployment workflow if your repository prefers that route.
-3. Wait for the Pages deployment to finish. The Key-Flows organization site URL is `https://key-flows.github.io/` when the repository is named `key-flows.github.io`.
-4. This app uses relative paths (`css/...`, `js/...`, `assets/...`), so project-site subpaths work without a build or rewrite rule. The canonical URL, sitemap, and robots file are configured for `https://key-flows.github.io/`. The Open Graph image path is relative and does not require a root path.
+3. Wait for the Pages deployment to finish. The KeyFlows organization repository is named `keyflows.github.io`, so its expected site URL is `https://keyflows.github.io/`.
+4. This app uses relative paths (`css/...`, `js/...`, `assets/...`), so project-site subpaths work without a build or rewrite rule. The canonical URL, sitemap, and robots file are configured for `https://keyflows.github.io/`. The Open Graph image path is relative and does not require a root path.
 
 The `404.html` page is supplied for GitHub Pages. No server rewrite configuration is required.
 
@@ -49,6 +49,8 @@ Use a current release of Firefox, Safari, Chrome, or Edge. Core functionality us
 - Timed tests: 15, 30, 60, and 120 seconds.
 - Word count tests: 10, 25, 50, and 100 words; user-provided custom text; daily prompts; punctuation and number variants.
 - Lessons, adaptive deterministic recommendations, local statistics, SVG trend charts, daily goals, streaks, achievement markers, export/import, and three theme choices.
+- Generated timed and word-count practice passages are freshly randomized on each new test and timed rollover. Lessons stay stable for repeatable drills; daily challenge passages stay the same for everyone on the same day.
+- Personalized coaching uses transparent, deterministic browser logic on the user's saved session statistics. It does not call an AI service, require an API key, or send typing data anywhere. Recommendations identify actionable areas such as accuracy, repeated character errors, and practice consistency; they are guidance, not a promise of improvement.
 - No global leaderboard, verified public scores, multiplayer, account, or cross-device synchronization. These features need a server with identity, storage, and abuse prevention. The present local challenge history is per browser.
 - User custom text is kept in settings on the current browser for convenience, never included in session records or exports as test content. Exported data includes current settings, including saved custom text.
 
