@@ -25,7 +25,7 @@ export const lessonContent=[
  {title:'Letter pairs',group:'FIND YOUR FLOW',icon:'↔',description:'Smooth out common combinations.',text:'the quick brown fox moved through the green field and found a quiet place'},
  {title:'Common words',group:'FIND YOUR FLOW',icon:'✎',description:'Build ease with familiar words.',text:'people often learn more when they take time to think and write with care'},
  {title:'Full sentences',group:'FIND YOUR FLOW',icon:'¶',description:'Bring accuracy into natural writing.',text:'Small moments of practice can create a lasting sense of confidence.'},
- {title:'Developer symbols',group:'BEYOND THE BASICS',icon:'</>',description:'Get comfortable with everyday code symbols.',text:'const ready = true; if (ready) { return { flow: "steady", count: 3 }; }'}
+ {title:'Everyday messages',group:'USEFUL WRITING',icon:'✉',description:'Practice the kind of sentences you type every day.',text:'Hello, I hope your day is going well. Please let me know when you have a moment, and I will get back to you soon.'}
 ];
 export const dailyPrompts=[
  {name:'A little more room',text:'A quiet mind makes room for a thoughtful beginning. Take a breath, trust your hands, and let each small choice bring you closer to a comfortable rhythm.'},

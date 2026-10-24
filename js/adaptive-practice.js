@@ -1,6 +1,6 @@
 import {generateWords} from './text-generator.js';
 export function analyzeSessions(sessions=[]){
-  if(!sessions.length)return {title:'Start with a quick diagnostic',copy:'A short warm-up helps Keyflow find a useful practice focus for you.',exercise:'letters'};
+  if(!sessions.length)return {title:'Start with a quick diagnostic',copy:'A short warm-up helps KeyFlows find a useful practice focus for you.',exercise:'letters'};
   const chars={},pairs={};for(const s of sessions.slice(-20)){for(const [k,v] of Object.entries(s.keyErrors||{}))chars[k]=(chars[k]||0)+v;for(const [k,v] of Object.entries(s.keyPairs||{}))pairs[k]=(pairs[k]||0)+v;}
   const topChar=Object.entries(chars).sort((a,b)=>b[1]-a[1])[0],topPair=Object.entries(pairs).sort((a,b)=>b[1]-a[1])[0];
   if(topPair)return {title:`Give “${topPair[0]}” a little practice`,copy:`This letter pair appeared in ${topPair[1]} mistakes across your recent sessions. A short, relaxed repetition can help you notice its rhythm.`,exercise:'pairs',target:topPair[0]};

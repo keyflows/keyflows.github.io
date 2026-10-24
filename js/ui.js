@@ -1,8 +1,12 @@
 export function renderText(container,text,index,errors=[]){
-  if(container._renderText!==text){const frag=document.createDocumentFragment();for(let i=0;i<text.length;i++){const span=document.createElement('span');span.className='char';span.textContent=text[i];frag.append(span);}container.replaceChildren(frag);container._renderText=text;container._renderIndex=0;}
-  const spans=container.children,old=container._renderIndex??0,start=Math.max(0,Math.min(old,index)-1),end=Math.min(spans.length,Math.max(old,index)+1);
-  for(let i=start;i<end;i++){const el=spans[i];el.classList.remove('correct','incorrect','current');if(i<index)el.classList.add(errors[i]?'incorrect':'correct');else if(i===index)el.classList.add('current');}
-  container._renderIndex=index;const current=container.querySelector('.current');if(current){const parent=container.getBoundingClientRect(),rect=current.getBoundingClientRect();if(rect.bottom>parent.bottom-6)container.scrollTop+=rect.bottom-parent.bottom+25;}
+  let rebuilt=false;if(container._renderText!==text){const prior=container._renderText||'',canAppend=prior&&text.startsWith(prior),startAt=canAppend?prior.length:0,frag=document.createDocumentFragment();for(let i=startAt;i<text.length;i++){const span=document.createElement('span');span.className='char';span.textContent=text[i];frag.append(span);}if(canAppend)container.append(frag);else{container.replaceChildren(frag);container.scrollTop=0;container._renderIndex=0;rebuilt=true;}container._renderText=text;}
+  const spans=container.children,old=container._renderIndex??0;
+  if(rebuilt||old!==index){const start=rebuilt?0:Math.max(0,Math.min(old,index)-1),end=rebuilt?spans.length:Math.min(spans.length,Math.max(old,index)+1);for(let i=start;i<end;i++){const el=spans[i];el.classList.remove('correct','incorrect','current');if(i<index)el.classList.add(errors[i]?'incorrect':'correct');else if(i===index)el.classList.add('current');}}
+  container._renderIndex=index;
+  const followCursor=()=>{if(container._scrollFrame!==null)return;container._scrollFrame=requestAnimationFrame(()=>{container._scrollFrame=null;const current=container.children[container._renderIndex];if(!current)return;const cursor=current.getBoundingClientRect(),viewport=container.getBoundingClientRect(),fontSize=parseFloat(getComputedStyle(container).fontSize)||20,lineHeight=parseFloat(getComputedStyle(container).lineHeight)||34,pad=Math.min(lineHeight*.45,Math.max(6,fontSize*.5));if(cursor.top<viewport.top+pad)container.scrollTop-=viewport.top+pad-cursor.top;else if(cursor.bottom>viewport.bottom-pad)container.scrollTop+=cursor.bottom-(viewport.bottom-pad);});};
+  if(container._scrollFrame===undefined)container._scrollFrame=null;
+  if((rebuilt||old!==index)&&index<spans.length)followCursor();
+  if(!container._cursorResizeObserver&&'ResizeObserver'in window){container._cursorResizeObserver=new ResizeObserver(followCursor);container._cursorResizeObserver.observe(container);}
 }
 export function toast(message){const region=document.querySelector('#toast-region'),el=document.createElement('div');el.className='toast';el.textContent=message;region.append(el);setTimeout(()=>el.remove(),3200);}
 export function openDialog(id){const d=document.getElementById(id);if(d&&!d.open)d.showModal();}

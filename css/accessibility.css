@@ -1,0 +1,45 @@
+/* Small, targeted usability improvements layered over the visual system. */
+.typing-card:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.mode-toolbar {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 16px;
+}
+
+.brand sup {
+  color: var(--warm);
+  font-size: 9px;
+  margin-left: 2px;
+  vertical-align: super;
+}
+
+.site-footer a,
+.dialog a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 390px) {
+  .mode-toolbar {
+    gap: 8px;
+  }
+
+  .mode-toolbar .segmented {
+    width: 100%;
+  }
+
+  .mode-toolbar .segment {
+    flex: 1;
+    padding-inline: 5px;
+  }
+
+  .mode-toolbar .select-wrap {
+    margin-left: 0;
+  }
+}
