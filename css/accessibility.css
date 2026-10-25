@@ -183,6 +183,95 @@
   margin: 3px 0 0;
 }
 
+.result-focus-line {
+  stroke: var(--warm);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+  pointer-events: none;
+}
+
+.result-point {
+  cursor: pointer;
+  stroke: var(--bg);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.result-net-point {
+  fill: var(--accent);
+}
+
+.result-raw-point {
+  fill: var(--warm);
+}
+
+.result-accuracy-point {
+  fill: var(--chart-accuracy);
+}
+
+.result-point.is-selected,
+.chart-point.is-selected {
+  stroke: var(--ink);
+  stroke-width: 3;
+  transform: scale(1.5);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.result-chart,
+.chart-card svg {
+  touch-action: pan-y;
+}
+
+.result-sample-callout rect,
+.chart-sample-callout rect {
+  fill: var(--surface-3);
+  stroke: var(--accent);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.result-callout-pointer,
+.chart-callout-pointer {
+  fill: var(--surface-3);
+  stroke: var(--accent);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+#result-chart .result-sample-callout text,
+.chart-card svg .chart-sample-callout text {
+  fill: var(--ink);
+  font: 600 9px var(--mono);
+}
+
+.result-sample-callout,
+.chart-sample-callout {
+  pointer-events: none;
+}
+
+#result-chart:focus-visible,
+.chart-card svg:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 5px;
+}
+
+.result-chart-help,
+.result-chart-selected,
+.chart-interaction-help,
+.chart-interaction-summary {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.result-chart-selected,
+.chart-interaction-summary {
+  min-height: 1.4em;
+  color: var(--ink);
+}
+
 @media (max-width: 480px) {
   .result-pace {
     padding: 12px 9px 9px;

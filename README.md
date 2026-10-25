@@ -72,7 +72,7 @@ Use a current release of Firefox, Safari, Chrome, or Edge. Core functionality us
 
 ## Privacy and schema
 
-The versioned `keyflows.data` localStorage record contains preferences, aggregate session summaries, streaks, challenge bests, and earned badges. It does not retain keystroke streams. Browser storage is best effort; use **Settings → Export data** for a portable JSON backup. Import validates data shape and version before replacing current data. Data is not uploaded or synchronized.
+The versioned `keyflows.data` localStorage record contains preferences, aggregate session summaries, streaks, challenge bests, and earned badges. It does not retain keystroke streams. The Statistics page’s **Download spreadsheet** action exports session summaries as CSV, which opens in Excel, Numbers, and other spreadsheet apps. **Settings → Download full backup** creates a restorable JSON backup; restoring it replaces this device’s current data after confirmation. Full backups include saved custom text. Data is not uploaded or synchronized.
 
 ## License
 

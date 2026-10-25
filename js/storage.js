@@ -20,6 +20,22 @@ export function validateData(value){
 export function loadData(){try{const stored=localStorage.getItem(KEY)||localStorage.getItem(LEGACY_KEY);return validateData(JSON.parse(stored))||structuredClone(defaults);}catch{return structuredClone(defaults);}}
 export function saveData(data){try{localStorage.setItem(KEY,JSON.stringify(validateData(data)||defaults));return true;}catch{return false;}}
 export function exportData(data){return JSON.stringify(validateData(data)||defaults,null,2);}
+export function exportSessionsCsv(sessions=[]){
+  const columns=['Date (UTC)','Practice mode','Test length','Exercise','Net WPM','Raw WPM','Accuracy (%)','Correct keystrokes','Mistakes','Duration (seconds)','Words completed'];
+  const cell=value=>{
+    let text=String(value??'');
+    if(/^[\t\r ]*[=+\-@]/.test(text))text=`'${text}`;
+    return `"${text.replace(/"/g,'""')}"`;
+  };
+  const rows=[columns,...(Array.isArray(sessions)?sessions:[]).map(s=>{
+    const mode=String(s?.mode||'practice');
+    const size=mode==='time'?`${Number(s.limit)||0} seconds`:mode==='words'?`${Number(s.limit)||0} words`:mode==='daily'?'Daily challenge':mode==='custom'?'Custom text':mode==='lesson'?'Lesson':'';
+    const exercise=s?.exercise||((Number.isInteger(s?.lessonIndex))?`Lesson ${s.lessonIndex+1}`:'');
+    const reliable=s?.speedReliable!==false;
+    return [s?.date,mode,size,exercise,reliable?s?.netWpm:'',reliable?s?.rawWpm:'',s?.accuracy,s?.correct,s?.errors,Number.isFinite(s?.elapsedMs)?(s.elapsedMs/1000).toFixed(1):'',s?.wordsCompleted];
+  })];
+  return `\uFEFF${rows.map(row=>row.map(cell).join(',')).join('\r\n')}`;
+}
 export function importData(text){try{const parsed=JSON.parse(text);const clean=validateData(parsed);if(!clean)throw new Error('Unsupported or invalid KeyFlows file.');return {ok:true,data:clean};}catch(error){return {ok:false,error:error.message};}}
 export function clearData(){try{localStorage.removeItem(KEY);localStorage.removeItem(LEGACY_KEY);return true;}catch{return false;}}
 export function getStorageKey(){return KEY;}
