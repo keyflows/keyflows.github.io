@@ -59,6 +59,8 @@
   border: 1px solid var(--line);
   border-radius: 11px;
   background: var(--surface);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
 }
 
 .result-pace-heading,
@@ -76,14 +78,14 @@
 .result-pace-note,
 .result-pace-explainer {
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .result-legend {
   gap: 8px 17px;
   margin: 10px 0 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .result-legend span {
@@ -133,11 +135,11 @@
 .result-axis-label,
 .result-axis-title {
   fill: var(--muted);
-  font: 10px var(--sans);
+  font: 600 16px var(--sans);
 }
 
 .result-axis-title {
-  font-size: 9px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: .08em;
 }
@@ -181,6 +183,39 @@
 
 .result-pace-explainer {
   margin: 3px 0 0;
+}
+
+#result-dialog .result-detail,
+#result-dialog .result-comparison {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+#result-dialog .result-metrics span {
+  font-size: 12px;
+  letter-spacing: .08em;
+}
+
+#result-dialog .result-tag,
+#result-dialog .result-headline .eyebrow,
+#result-dialog #result-pace-title,
+#result-dialog .result-recommend .eyebrow {
+  font-size: 12px;
+}
+
+#result-dialog .result-trend {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+#result-dialog .result-recommend p {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+#result-dialog .result-recommend small {
+  font-size: 11px;
+  line-height: 1.5;
 }
 
 .result-focus-line {
@@ -242,7 +277,45 @@
 #result-chart .result-sample-callout text,
 .chart-card svg .chart-sample-callout text {
   fill: var(--ink);
-  font: 600 9px var(--mono);
+  font: 600 14px var(--mono);
+}
+
+#result-chart .result-sample-callout .callout-time {
+  font-size: 13px;
+}
+
+#result-chart .result-sample-callout .callout-values {
+  font-size: 13px;
+}
+
+.chart-card svg > text {
+  font: 600 13px var(--sans);
+}
+
+.result-chart-help,
+.result-chart-selected,
+.chart-interaction-help,
+.chart-interaction-summary {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.result-chart-summary,
+.result-chart-empty,
+.result-pace-explainer {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.result-chart-scroll-hint {
+  display: none;
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.chart-scroll-note {
+  display: none;
 }
 
 .result-sample-callout,
@@ -277,13 +350,37 @@
     padding: 12px 9px 9px;
   }
 
+  .result-chart {
+    min-width: 540px;
+  }
+
+  .result-chart-scroll-hint {
+    display: block;
+  }
+
+  .chart-card {
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+  }
+
+  .chart-card svg {
+    min-width: 520px;
+  }
+
+  .chart-scroll-note {
+    margin: 5px 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
   .result-pace-note {
     width: 100%;
   }
 
   .result-legend {
     gap: 7px 11px;
-    font-size: 9px;
+    font-size: 12px;
   }
 }
 
