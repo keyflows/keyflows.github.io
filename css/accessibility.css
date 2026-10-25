@@ -1,4 +1,6 @@
 /* Small, targeted usability improvements layered over the visual system. */
+:root{--chart-accuracy:#83b8d8}
+:root[data-theme="light"]{--chart-accuracy:#356882}
 .typing-card:focus-within {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
@@ -51,6 +53,151 @@
   background: color-mix(in srgb, var(--bad) 12%, transparent);
 }
 
+.result-pace {
+  margin: 14px 0 4px;
+  padding: 15px 14px 11px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--surface);
+}
+
+.result-pace-heading,
+.result-legend {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.result-pace-heading {
+  justify-content: space-between;
+}
+
+.result-pace-note,
+.result-pace-explainer {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.result-legend {
+  gap: 8px 17px;
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.result-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.result-legend span::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  border-top: 2px solid var(--accent);
+}
+
+.result-legend .legend-raw::before {
+  border-color: var(--warm);
+  border-top-style: dashed;
+}
+
+.result-legend .legend-accuracy::before {
+  border-color: var(--chart-accuracy);
+  border-top-style: dotted;
+}
+
+.result-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 2px 0 0;
+  overflow: visible;
+}
+
+.result-chart[hidden] {
+  display: none;
+}
+
+.result-grid {
+  stroke: var(--line);
+  stroke-dasharray: 3 5;
+}
+
+.result-grid-soft {
+  stroke-dasharray: 2 6;
+}
+
+.result-axis-label,
+.result-axis-title {
+  fill: var(--muted);
+  font: 10px var(--sans);
+}
+
+.result-axis-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.result-series {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.result-net {
+  stroke: var(--accent);
+}
+
+.result-raw {
+  stroke: var(--warm);
+  stroke-dasharray: 6 4;
+}
+
+.result-accuracy {
+  stroke: var(--chart-accuracy);
+  stroke-dasharray: 2 4;
+}
+
+.result-chart-empty {
+  margin: 12px 0 0;
+  padding: 15px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.result-chart-summary {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.result-pace-explainer {
+  margin: 3px 0 0;
+}
+
+@media (max-width: 480px) {
+  .result-pace {
+    padding: 12px 9px 9px;
+  }
+
+  .result-pace-note {
+    width: 100%;
+  }
+
+  .result-legend {
+    gap: 7px 11px;
+    font-size: 9px;
+  }
+}
+
 .mode-toolbar {
   border: 0;
   border-bottom: 1px solid var(--line);
@@ -98,6 +245,26 @@
   font-size: 24px;
   line-height: 1.72;
   letter-spacing: .01em;
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-word;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.typing-text .typing-word {
+  white-space: nowrap;
+}
+
+.typing-text .char.whitespace {
+  white-space: pre-wrap;
+}
+
+.typing-text .typing-word.typing-word-long {
+  white-space: normal;
+  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 .start-overlay {
