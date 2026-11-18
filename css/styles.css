@@ -15,3 +15,6 @@
 .site-footer .legal-links{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
 .site-footer .legal-links a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 .site-footer .legal-links a:hover{color:var(--accent)}
+
+/* Guides navigation link */
+.guides-nav-link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:var(--muted);font-size:12px;padding:9px 11px;border-radius:8px;white-space:nowrap}.guides-nav-link:hover{color:var(--ink);background:var(--surface-2)}
