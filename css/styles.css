@@ -10,3 +10,8 @@
 .certificate-preview-card{margin:17px 0;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
 .certificate-preview-card img{display:block;width:100%;height:auto;aspect-ratio:1200/850;object-fit:contain;border-radius:7px}
 .certificate-preview-card figcaption{margin-top:8px;text-align:center;color:var(--muted);font-size:11px}
+
+/* Legal footer links */
+.site-footer .legal-links{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.site-footer .legal-links a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.site-footer .legal-links a:hover{color:var(--accent)}
